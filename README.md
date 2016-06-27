@@ -2,6 +2,24 @@
 
 [Wiki page](https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Groovy+Plugin)
 
+
+## Build Instructions
+
+    mvn package -DskipTests
+
+## Install Instructions
+    scp target/workflow-cps.jar BUILD_SERVER:
+
+### Overwriting plugin on build server:
+
+    ssh BUILD_SERVER
+    sudo -i
+    cd ~jenkins/plugins/workflow-cps/WEB-INF/lib/
+    mv workflow-cps.jar workflow-cps.jar.orig
+    mv ~danny/workflow-cps.jar .
+    chown jenkins:jenkins workflow-cps.jar
+    service jenkins restart
+
 ## Introduction
 
 A key component of the Pipeline plugin suite, this provides the standard execution engine for Pipeline steps, based on a custom [Groovy](http://www.groovy-lang.org/) interpreter that runs inside the Jenkins master process.
